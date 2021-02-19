@@ -2,8 +2,6 @@
 django Frontify
 ===============
 
-|pypi| |build| |coverage|
-
 Documentation
 =============
 
