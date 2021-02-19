@@ -1,0 +1,6 @@
+# requirements from setup.py
+django-frontify
+# other requirements
+django-app-helper
+tox
+coverage

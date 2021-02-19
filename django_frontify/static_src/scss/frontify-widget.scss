@@ -1,0 +1,86 @@
+.frontify-image-field {
+  padding: 20px;
+  border: solid 1px #ddd;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  box-sizing: border-box !important;
+
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.frontify-preview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  display: none;
+
+  .frontify-image-field--selected & {
+    display: block;
+  }
+
+  &__image {
+    margin-right: 10px;
+  }
+}
+
+.frontify-spacer {
+  flex: 1 1 auto;
+  display: none;
+
+  .frontify-image-field--selected & {
+    display: block;
+  }
+}
+
+.frontify-remove-selection {
+  display: none;
+  margin-left: 10px;
+  line-height: 22px;
+  padding: 10px 20px !important;
+  border-radius: 3px;
+
+  .frontify-image-field--selected & {
+    display: block;
+  }
+}
+
+button.frontify-button {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid #363d4a;
+  background-color: #363d4a !important;
+  color: #ffffff !important;
+  line-height: 22px;
+  padding: 10px 20px !important;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(#363d4a, 0.8) !important;
+  }
+
+  .change-text {
+    display: none;
+  }
+
+  .frontify-image-field--selected & {
+    .choose-text {
+      display: none;
+    }
+
+    .change-text {
+      display: inline;
+    }
+  }
+}
+
+.frontify-button__icon {
+  margin-right: 10px;
+  fill: #ffffff;
+}
