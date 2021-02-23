@@ -17,16 +17,7 @@ window.addEventListener('load', () => {
       '.frontify-remove-selection'
     );
 
-    removeButton.addEventListener('click', event => {
-      event.preventDefault();
-      fieldWrapper.classList.remove(frontifyFieldSelectedClass);
-      imageTag.src = '';
-      nameTag.innerHTML = '';
-      inputField.innerHTML = '';
-    });
-
-    selectButton.addEventListener('click', event => {
-      event.preventDefault();
+    const openFrontifyFinder = () => {
       // https://weare.frontify.com/d/3WghAQkakjYf/finder#/frontify-finder/assets-data-structure
       FrontifyFinder.open({
         domain: fieldDomain,
@@ -44,10 +35,23 @@ window.addEventListener('load', () => {
           console.log('Selection cancelled!');
         },
         error: message => {
-          console.log(`Error: ${message}`);
+          console.log(`Error:`, message);
+          if (message.code === "ERR_FINDER_MESSAGE") {
+            const msgJson = JSON.parse(message.message);
+            if (msgJson.readyState === 4 && msgJson.responseJSON.error.includes("Access token expired")) {
+              console.warn("Access Token expired");
+              console.log(localStorage.getItem("FrontifyFinder_token"))
+              if (localStorage.getItem("FrontifyFinder_token")) {
+                console.log("Token found. Clear token and start finder again.")
+                FrontifyFinder.close();
+                localStorage.removeItem("FrontifyFinder_token");
+                openFrontifyFinder();
+              }
+            }
+          }
         },
         warning: message => {
-          console.log(`Warning: ${message}`);
+          console.log(`Warning:`, message);
         },
         settings: {
           multiSelect: false,
@@ -77,6 +81,19 @@ window.addEventListener('load', () => {
           }
         }
       });
+    }
+
+    removeButton.addEventListener('click', event => {
+      event.preventDefault();
+      fieldWrapper.classList.remove(frontifyFieldSelectedClass);
+      imageTag.src = '';
+      nameTag.innerHTML = '';
+      inputField.innerHTML = '';
+    });
+
+    selectButton.addEventListener('click', event => {
+      event.preventDefault();
+      openFrontifyFinder();
     });
   }
 
