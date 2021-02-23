@@ -39,6 +39,33 @@ and this in a other
 now you should be able to accesses the example django project via http://localhost:8000
 
 
+Release requirements
+--------------------
+
+to release a package you have to add the following file
+
+    vim ~/.pypirc
+
+with the following content
+
+.. code-block::
+
+    [distutils]
+    index-servers =
+      pypi
+      pypitest
+    
+    [pypi]
+    repository: https://pypi.python.org/pypi
+    username: YOUR_USERNAME_HERE
+    password: YOUR_PASSWORD_HERE
+    
+    [pypitest]
+    repository: https://test.pypi.org/legacy/
+    username: YOUR_USERNAME_HERE
+    password: YOUR_PASSWORD_HERE
+
+
 Release package
 ---------------
 
