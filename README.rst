@@ -22,6 +22,16 @@ Configuration
 Set ``DJANGO_FRONTIFY_DOMAIN="<your-frontify-donmain>"`` in your settings.py
 
 
+Tecnical auestions about frontify?
+----------------------------------
+
+Frontify Slack Channel:  
+https://frontify-friends.slack.com/join/shared_invite/zt-b910hbol-9cGnIaCet11a9D4uzpVWmQ#/shared-invite/email 
+
+Frontify API Documentation:  
+https://developer.frontify.com/ 
+
+
 Development
 =============
 
