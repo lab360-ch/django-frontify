@@ -22,7 +22,7 @@ Configuration
 Set ``DJANGO_FRONTIFY_DOMAIN="<your-frontify-donmain>"`` in your settings.py
 
 
-Tecnical auestions about frontify?
+Tecnical questions about frontify?
 ----------------------------------
 
 Frontify Slack Channel:  
