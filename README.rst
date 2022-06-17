@@ -13,13 +13,22 @@ Installation
 
  * run ``pip install django-frontify``
  * add ``django-frontify`` to your ``INSTALLED_APPS``
- * add ``DJANGO_FRONTIFY_DOMAIN`` to your settings file
+ * add configuration (as mentioned below) to your settings file
 
 
 Configuration
 -------------
 
-Set ``DJANGO_FRONTIFY_DOMAIN="<your-frontify-donmain>"`` in your settings.py
+* Set ``DJANGO_FRONTIFY_DOMAIN="<your-frontify-donmain>"`` in your settings.py
+* Set ``DJANGO_FRONTIFY_FINDER_VERSION=2`` in your settings.py
+* Set ``DJANGO_FRONTIFY_CLIENT_ID="<your-client-id>"`` in your settings.py
+
+
+Version usage
+-------------
+Frontify has released a new version of its Finder, which made the previous version (v1) a legacy version.
+To still use the legacy version, set ``DJANGO_FRONTIFY_FINDER_VERSION=1``.
+Otherwise, beware that you've set ``DJANGO_FRONTIFY_CLIENT_ID="<your-client-id>"``
 
 
 Tecnical questions about frontify?
@@ -58,7 +67,7 @@ to release a package you have to add the following file
 
 with the following content
 
-.. code-block::
+.. code-block::DJANGO_FRONTIFY_CLIENT_ID
 
     [distutils]
     index-servers =

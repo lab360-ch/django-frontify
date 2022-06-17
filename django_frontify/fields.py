@@ -10,30 +10,43 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class FrontifyImage:
-    SUPPORTED_FORMATS = ["jpg", "jpeg", "png"]
+    SUPPORTED_FORMATS = ["jpg", "jpeg", "png", "webp"]
 
     def __init__(self, data):
         data_dict = json.loads(data)
         self.json_data = data
+
         self.name = data_dict.get("name", "")
         self.id = data_dict.get("id", "")
-        self.project = data_dict.get("project", "")
+        self.project = data_dict.get("project", "") # unavailable in v2
         self.creator_name = data_dict.get("creator_name", "")
         self.created = data_dict.get("created", "")
-        self.modifier_name = data_dict.get("modifier_name", "")
-        self.modified = data_dict.get("modified", "")
+        self.modifier_name = data_dict.get("modifier_name", "") # unavailable in v2
+        self.modified = data_dict.get("modified", "") # unavailable in v2
         self.object_type = data_dict.get("object_type", "")
-        self.media_type = data_dict.get("media_type", "")
+        self.media_type = data_dict.get("media_type", "") # unavailable in v2
         self.title = data_dict.get("title", "")
         self.description = data_dict.get("description", "")
         self.ext = data_dict.get("ext", "")
         self.width = data_dict.get("width", "")
         self.height = data_dict.get("height", "")
-        self.filesize = data_dict.get("filesize", "")
-        self.asset_status = data_dict.get("asset_status", "")
+        self.filesize = data_dict.get("filesize", "") # seems to differ in v2
+        self.asset_status = data_dict.get("asset_status", "") # unavailable in v2
         self.generic_url = data_dict.get("generic_url", "").split("?")[0]
-        self.preview_url = data_dict.get("preview_url", "")
+        self.preview_url = data_dict.get("previewUrl", "")
         self.download_url = data_dict.get("download_url", "")
+
+        if 'downloadUrl' in data_dict:
+            # New response when using FrontifyFinderV2
+            self.ext = data_dict.get("extension", "")
+            self.title = data_dict.get("title", "")
+            self.name = f"{self.title}.{self.ext}"
+            self.creator_name = data_dict.get("creator", {}).get('name')
+            self.created = data_dict.get("createdAt", "")
+            self.object_type = data_dict.get("type", "")
+            self.filesize = data_dict.get("size", "") # seems to differ in v2
+            self.generic_url = data_dict.get("previewUrl", "").split("?")[0]
+            self.download_url = data_dict.get("downloadUrl", "")
 
     @property
     def admin_preview(self):
@@ -115,6 +128,8 @@ def convert_to_frontify_image_instance(value):
 
 
 class AdminFrontifyWidget(forms.Textarea):
+
+
     def render(self, name, value, attrs=None, renderer=None):
         hidden_input = super().render(name, value, attrs=attrs, renderer=renderer)
         instance = convert_to_frontify_image_instance(value)
@@ -122,6 +137,8 @@ class AdminFrontifyWidget(forms.Textarea):
             "instance": instance,
             "hidden_input": hidden_input,
             "domain": settings.DJANGO_FRONTIFY_DOMAIN,
+            "client_id": getattr(settings, 'DJANGO_FRONTIFY_CLIENT_ID', ''),
+            "finder_version": getattr(settings, 'DJANGO_FRONTIFY_FINDER_VERSION', 2),
             ** attrs
         }
         html = render_to_string(
@@ -136,10 +153,16 @@ class AdminFrontifyWidget(forms.Textarea):
                 'django_frontify/widget.css'
             ]
         }
-        js = (
-            'https://cdn.frontify.com/finder/frontify-finder-latest.min.js',
-            'django_frontify/widget.js',
-        )
+        if getattr(settings, 'DJANGO_FRONTIFY_FINDER_VERSION', 2) == 2:
+            js = (
+                'https://unpkg.com/@frontify/frontify-finder@2.0.1/dist/index.js',
+                'django_frontify/widget.js',
+            )
+        else:
+            js = (
+                'https://cdn.frontify.com/finder/frontify-finder-latest.min.js',
+                'django_frontify/widget.js',
+            )
 
 
 class AdminFrontifyFormField(forms.CharField):

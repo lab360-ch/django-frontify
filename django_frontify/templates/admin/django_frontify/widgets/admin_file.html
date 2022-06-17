@@ -1,6 +1,11 @@
 {% load i18n static %}
 <div class="related-widget-wrapper widget-wrapper-links-1">
-  <div class="frontify-image-field{% if instance %} frontify-image-field--selected{% endif %}" data-id="{{ id }}" data-domain="{{ domain }}">
+  <div 
+    class="frontify-image-field{% if instance %} frontify-image-field--selected{% endif %}" 
+    data-id="{{ id }}" 
+    data-finder-version="{{ finder_version }}" 
+    data-domain="{{ domain }}" 
+    data-client-id="{{ client_id }}">
     <div class="frontify-image-field__inner">
       <div class="frontify-preview">
         <img class="frontify-preview__image" src="{{ instance.admin_preview }}">
@@ -16,5 +21,5 @@
     </div>
     <div class="hidden">{{ hidden_input }}</div>
   </div>
+  <div class="frontify-modal"></div>
 </div>
-{% comment %} <div id="FinderWrapper"></div> {% endcomment %}

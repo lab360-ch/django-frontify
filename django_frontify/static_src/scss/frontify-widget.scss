@@ -84,3 +84,33 @@ button.frontify-button {
   margin-right: 10px;
   fill: #ffffff;
 }
+
+.frontify-modal {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: none;
+  min-width: 400px;
+  border: 4px solid #417690;
+
+  @media screen and (min-height: 900px) {
+    top: 100px;
+  }
+
+  .frontify-modal-open & {
+    display: block;
+  }
+
+  &:after {
+    content: " ";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: rgba(0,0,0,0.75);
+  }
+}

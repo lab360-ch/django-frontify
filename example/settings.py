@@ -123,4 +123,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public_html', 'static')
 
 STATIC_URL = '/static/'
 
-DJANGO_FRONTIFY_DOMAIN = 'https://sky-frame.frontify.com/'
+DJANGO_FRONTIFY_DOMAIN = "https://<YOUR-BRAND>.frontify.com/"
+DJANGO_FRONTIFY_FINDER_VERSION = 2
+DJANGO_FRONTIFY_CLIENT_ID = "<CLIENT_ID>"
