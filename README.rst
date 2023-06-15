@@ -12,7 +12,7 @@ Installation
 ------------
 
  * run ``pip install django-frontify``
- * add ``django-frontify`` to your ``INSTALLED_APPS``
+ * add ``django_frontify`` to your ``INSTALLED_APPS``
  * add configuration (as mentioned below) to your settings file
 
 
