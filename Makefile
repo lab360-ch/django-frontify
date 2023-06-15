@@ -3,6 +3,7 @@ ENV = venv
 VENV = $(ENV)/bin/activate
 PIP = $(ENV)/bin/pip
 PYTHON = $(ENV)/bin/python
+TWINE = $(ENV)/bin/twine
 PORT = 8000
 VERSION = 2.2
 
@@ -30,13 +31,13 @@ node_modules:
 
 test_release: django_frontify.egg-info node_modules
 	npm run build
-	$(PYTHON) setup.py register -r pypitest
-	$(PYTHON) setup.py sdist upload -r pypitest
+	$(PYTHON) setup.py bdist_wheel
+	$(TWINE) upload -r pypitest dist/*
 
 release: django_frontify.egg-info node_modules
 	npm run build
-	$(PYTHON) setup.py register -r pypi
-	$(PYTHON) setup.py sdist upload -r pypi
+	$(PYTHON) setup.py bdist_wheel
+	$(TWINE) upload dist/*
 
 watch_static: node_modules
 	npm run watch

@@ -75,7 +75,7 @@ with the following content
       pypitest
     
     [pypi]
-    repository: https://pypi.python.org/pypi
+    repository: https://upload.pypi.org/legacy/
     username: YOUR_USERNAME_HERE
     password: YOUR_PASSWORD_HERE
     
@@ -84,6 +84,7 @@ with the following content
     username: YOUR_USERNAME_HERE
     password: YOUR_PASSWORD_HERE
 
+and install `twine` with `pip install twine`.
 
 Release package
 ---------------
