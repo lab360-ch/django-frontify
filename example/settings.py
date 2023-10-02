@@ -65,6 +65,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",
             ],
         },
     },
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 
@@ -123,6 +124,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "public_html", "static")
 
 STATIC_URL = "/static/"
 
-DJANGO_FRONTIFY_DOMAIN = "https://<YOUR-BRAND>.frontify.com/"
+DJANGO_FRONTIFY_DOMAIN = "https://sky-frame.frontify.com/"
 DJANGO_FRONTIFY_FINDER_VERSION = 2
-DJANGO_FRONTIFY_CLIENT_ID = "<CLIENT_ID>"
+DJANGO_FRONTIFY_CLIENT_ID = "client-et4k5l1byq"

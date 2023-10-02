@@ -1,3 +1,4 @@
+{% load frontify_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +10,12 @@
     <h1>Example Images (croped)</h1>
     <ul>
         {% for object in object_list %}
-          <li><img src="{{ object.cropped_image }}" width="500" height="500"></li>
+        {% with "alt_tag_"|add:LANGUAGE_CODE as alt_tag  %}
+          <li>
+            <p>Custome Meta: {{ object.frontify_image | frontify_metadata:alt_tag }}</p>
+            <img src="{{ object.cropped_image }}" width="500" height="500">
+          </li>
+            {% endwith %}
         {% endfor %}
     </ul>
   </body>
