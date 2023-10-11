@@ -24,7 +24,7 @@ class FrontifyImage:
     def __init__(self, data):
         data_dict = json.loads(data)
         self.metadata = {}
-        for metadata in data_dict["metadataValues"]:
+        for metadata in data_dict.get("metadataValues", []):
             self.metadata[metadata["metadataField"]["label"]] = metadata["value"]
         self.json_data = data
 
