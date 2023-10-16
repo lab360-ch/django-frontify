@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
 
 from example.views import ExampleImageListView
 
 urlpatterns = [
-    path('', ExampleImageListView.as_view()),
-    path('admin/', admin.site.urls),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path("example/", ExampleImageListView.as_view()),
+    path("admin/", admin.site.urls),
+    re_path(r"^", include("cms.urls")),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

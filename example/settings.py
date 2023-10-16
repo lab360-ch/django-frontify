@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "djangocms_admin_style",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,9 +39,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_frontify",
-    # 'django_frontify.djangocms_frontify',
+    "django.contrib.sites",
+    "cms",
+    "menus",
+    "treebeard",
+    "sekizai",
+    "django_frontify.djangocms_frontify",
     "example",
 ]
+
+SITE_ID = 1
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -50,6 +60,14 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",
+]
+
+CMS_TEMPLATES = [
+    ("default_cms_template.html", "Home page template"),
 ]
 
 ROOT_URLCONF = "urls"
@@ -66,6 +84,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.i18n",
+                "sekizai.context_processors.sekizai",
             ],
         },
     },
@@ -73,6 +92,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "wsgi.application"
 
+
+LANGUAGES = [
+    ("en", "English"),
+    ("de", "German"),
+]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

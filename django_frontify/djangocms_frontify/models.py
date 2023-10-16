@@ -35,6 +35,7 @@ class FrontifyImagePluginModel(CMSPlugin):
             )
         ]
         + [(x, x) for x in FrontifyImage.SUPPORTED_FORMATS],
+        default=getattr(settings, "DJANGO_FRONTIFY_IMAGE_PLUGIN_DEFAULT_FORMAT", None),
         max_length=10,
         blank=True,
     )
