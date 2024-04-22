@@ -5,7 +5,7 @@ PIP = $(ENV)/bin/pip
 PYTHON = $(ENV)/bin/python
 TWINE = $(ENV)/bin/twine
 PORT = 8000
-VERSION = 2.2
+VERSION = 4.2
 
 $(VENV):
 	##### create virtualenv
