@@ -39,6 +39,12 @@ class FrontifyImagePluginModel(CMSPlugin):
         max_length=10,
         blank=True,
     )
+    caption_text_db = models.TextField(
+        verbose_name=_('Caption text'),
+        blank=True,
+        null=True,
+        help_text=_('Provide a description, attribution, copyright or other information.')
+    )    
 
     @property
     def url(self):
@@ -58,6 +64,23 @@ class FrontifyImagePluginModel(CMSPlugin):
         return self.image.metadata.get(
             getattr(
                 settings, "DJANGO_FRONTIFY_ALT_TAG_METADATA", "alt-tag_{language_code}"
+            ).format(language_code=get_language()),
+            "",
+        )
+
+    @property
+    def caption_text(self):
+        """
+        Caption text can be set in the database or in the frontify metadata.
+        If both are set the database value is used.
+        Set `DJANGO_FRONTIFY_CAPTURE_METADATA` to get the capture text from the frontify metadata.
+        If you use an `{language_code}` in the string this would be replaced by the current language code.
+
+        E.q. capture-tag_{language_code} => capture-tag_en
+        """
+        return self.caption_text_db or self.image.metadata.get(
+            getattr(
+                settings, "DJANGO_FRONTIFY_CAPTURE_METADATA", "capture-tag_{language_code}"
             ).format(language_code=get_language()),
             "",
         )

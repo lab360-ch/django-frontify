@@ -194,7 +194,7 @@ class AdminFrontifyWidget(forms.Textarea):
         css = {"all": ["django_frontify/widget.css"]}
         if getattr(settings, "DJANGO_FRONTIFY_FINDER_VERSION", 2) == 2:
             js = (
-                "https://unpkg.com/@frontify/frontify-finder@2.0.1/dist/index.js",
+                "https://unpkg.com/@frontify/frontify-finder@2.1.0/dist/index.js",
                 "django_frontify/widget.js",
             )
         else:

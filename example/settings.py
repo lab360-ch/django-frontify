@@ -152,3 +152,5 @@ DJANGO_FRONTIFY_DOMAIN = "https://sky-frame.frontify.com/"
 DJANGO_FRONTIFY_FINDER_VERSION = 2
 DJANGO_FRONTIFY_CLIENT_ID = "client-et4k5l1byq"
 DJANGO_FRONTIFY_ALT_TAG_METADATA = "alt-tag_{language_code}"
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
